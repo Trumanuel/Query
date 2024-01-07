@@ -31,12 +31,12 @@ having 2<=count(distinct r.sid);
 
 7.Create a view that shows the names and colours of all the boats that have been reserved by
 a sailor with a specific rating.
-create view NamesAndRating as
-select sname, rating
-from Sailors
-order by rating DESC;
+create view ReservedBoatsWithRatedSailor as
+select distinct bname, color
+from Sailors s, Boat b, reserves r
+where s.sid=r.sid and b.bid=r.bid and s.rating=5;
 
-select * from NamesAndRating;
+select * from ReservedBoatsWithRatedSailor;
 
 8.A trigger that prevents boats from being deleted If they have active reservations.
 DELIMITER //
